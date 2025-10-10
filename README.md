@@ -65,7 +65,7 @@ This repo contains documentation, the `architecture diagram`, `n8n_workflow_scaf
    - Create the workflow shown in the diagram inside n8n.
    - Add Telegram Trigger node, allowed-user filter, STT integration, LLM agent HTTP nodes, and Elasticsearch nodes.
 
--. **AWS Bedrock**
+- **AWS Bedrock**
    - Provision models for classification and chat (or use a single flexible model with prompts).
    - Securely store credentials and endpoints.
 
