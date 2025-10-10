@@ -171,11 +171,11 @@ You can now view the document in **Discover**. The `semantic_all` field automati
 
 ## Step 3: Setting Up Agent Builder
 
-By default, Elastic’s **Managed LLM (Elastic Inference Service(EIS))** automatically generates **ES|QL** queries for you and retrieves results from your documents.
+By default, Elastic’s **Managed LLM (Elastic Inference Service(EIS))** automatically generates `ES|QL` queries for you and retrieves results from your documents.
 
 Take a look at what is [Elastic Inference Service](https://www.elastic.co/docs/explore-analyze/elastic-inference/eis "EIS documentation for Elastic").
 
-If you’d like more control, you can create **custom agents** — defining your own tools, ES|QL queries, parameters, and logic — but for now, the default `Elastic AI agent` is sufficient.
+If you’d like more control, you can create **custom agents** — defining your own tools, `ES|QL` queries, parameters, and logic — but for now, the default `Elastic AI agent` is sufficient.
 
 You can already start asking natural-language questions about your `expenses` index, even with just one document.
 
