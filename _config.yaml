@@ -1,0 +1,13 @@
+title: Bedrock + Elasticsearch Uber Demo
+theme: jekyll-theme-cayman
+url: https://som23git.github.io
+baseurl: /elasticsearch_mcp_n8n_telegram_bot
+
+header_pages:
+  - README.md
+
+permalink: pretty
+plugins:
+  - jekyll-redirect-from
+  - jekyll-include-cache
+  - jekyll-mermaid
