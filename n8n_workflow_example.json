@@ -1,0 +1,863 @@
+{
+  "name": "Automated Intent Classifier with Ingest & Query",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -96,
+        400
+      ],
+      "id": "bed47151-2cd0-4f6b-9e0b-652f8c9446d0",
+      "name": "Telegram Trigger",
+      "webhookId": "df86a66c-7c82-4cbc-9df0-5a350f84b590",
+      "credentials": {
+        "telegramApi": {
+          "id": "hIDk7MgpLrb1W8En",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "allow-user",
+              "leftValue": "={{ $json.message.from.id }}",
+              "rightValue": 9000000005,  
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        208,
+        400
+      ],
+      "id": "129f169e-05a5-455b-bf04-428a0f095315",
+      "name": "Allowed User?"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.voice }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "object",
+                      "operation": "exists",
+                      "singleValue": true
+                    },
+                    "id": "5db5977a-590d-452a-94a2-7340adc55300"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Audio"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "24e2a1cd-2c86-4f59-8cc5-ccca86d581d3",
+                    "leftValue": "={{ $json.message.voice }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "object",
+                      "operation": "notExists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Text"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        528,
+        384
+      ],
+      "id": "c3ed55b6-77dd-4139-9ef7-42f881d7411e",
+      "name": "Voice or Text?"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $json.message.voice.file_id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        816,
+        144
+      ],
+      "id": "b7f98beb-00eb-45a5-902a-d33e516027c5",
+      "name": "Get File (Voice)",
+      "webhookId": "a1581ecb-329e-4250-8912-70d988673ad3",
+      "credentials": {
+        "telegramApi": {
+          "id": "hIDk7MgpLrb1W8En",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.sarvam.ai/speech-to-text",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api-subscription-key",
+              "value": "replace_your_api_key_here"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "model",
+              "value": "saarika:v2.5"
+            },
+            {
+              "name": "language_code",
+              "value": "en-IN"
+            },
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "=data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1040,
+        144
+      ],
+      "id": "bccef7b2-01b1-4cbb-9db8-67961e283de8",
+      "name": "Sarvam STT"
+    },
+    {
+      "parameters": {
+        "jsCode": "const msg = $input.item.json;\nif (msg.text && !msg.transcript) msg.transcript = msg.text;\nreturn [{ json: msg }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1264,
+        144
+      ],
+      "id": "e7ab9781-bd98-4c91-aba9-cdede4946b62",
+      "name": "Set Transcript"
+    },
+    {
+      "parameters": {
+        "jsCode": "const msg = $input.item.json;\nconst unified_text = (msg.transcript || msg.message?.text || '').trim();\nreturn [{ json: {\n  ...msg,\n  chat_id: msg.message?.chat?.id ?? msg.chat_id ?? 'unknown',\n  user_id: msg.message?.from?.id ?? msg.user_id ?? 'unknown',\n  first_name: msg.message?.from?.first_name ?? null,\n  unified_text,\n} }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1504,
+        400
+      ],
+      "id": "141974d9-266d-4cb5-afc3-756674e8f553",
+      "name": "Build Unified Text"
+    },
+    {
+      "parameters": {
+        "model": "anthropic.claude-3-5-sonnet-20241022-v2:0",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAwsBedrock",
+      "typeVersion": 1.1,
+      "position": [
+        -144,
+        1072
+      ],
+      "id": "2a593fe4-6b3b-4ef5-83ee-ad7b4222b470",
+      "name": "AWS Bedrock (Classifier)",
+      "credentials": {
+        "aws": {
+          "id": "s7bdmXwQFEO7gTkc",
+          "name": "AWS account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.unified_text }}",
+        "options": {
+          "systemMessage": "You are a strict intent classifier for a Telegram expense bot. Classify exactly one message into one of: INGEST, QUERY, or UNKNOWN.\\n\\nDEFINITIONS:\\n- INGEST: User is recording a personal expense they made (mentions amount/currency/merchant/time/payment etc.).\\n- QUERY: User asks about past expenses, totals, trends, merchants, date ranges, top N, comparisons.\\n- UNKNOWN: Anything else.\\n\\nOUTPUT FORMAT (JSON only):\\n{\"intent\":\"INGEST|QUERY|UNKNOWN\",\"confidence\":0.0-1.0,\"reason\":\"short phrase\",\"entities\":{\"amount\":[],\"currency\":[],\"payment\":[],\"merchants\":[],\"dates\":[]}}\\n\\nGUIDANCE:\\n- Prefer INGEST if the message clearly records a new spend.\\n- Prefer QUERY if it asks to search/analyze previous data.\\n- Use UNKNOWN if ambiguous.\\n- Be conservative with confidence for vague texts."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -96,
+        864
+      ],
+      "id": "2dc81322-346f-4c70-8966-b82ec150fc89",
+      "name": "Classifier Agent (LLM)",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $input.item.json.output;\nfunction extractFirstJsonObject(str){\n  const s = str.indexOf('{'); if(s===-1) throw new Error('No JSON found');\n  let d=0; for(let i=s;i<str.length;i++){ const c=str[i]; if(c==='{' ) d++; else if(c==='}'){ d--; if(d===0) return str.slice(s,i+1);} }\n  throw new Error('Unbalanced JSON');\n}\nlet intent='UNKNOWN', confidence=0, reason='';\ntry{\n  const text = extractFirstJsonObject(raw);\n  const obj = JSON.parse(text);\n  intent = (obj.intent||'').toUpperCase();\n  confidence = Number(obj.confidence)||0;\n  reason = obj.reason||'';\n  if(!['INGEST','QUERY','UNKNOWN'].includes(intent)) intent='UNKNOWN';\n} catch(e){ intent='UNKNOWN'; confidence=0; reason='parse_error'; }\nreturn [{ json: { ...$input.item.json, intent, confidence, classify_reason: reason } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        864
+      ],
+      "id": "5218b147-e363-4d65-af36-254a93353afa",
+      "name": "Parse Classifier JSON"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "I couldn't tell if you want to add an expense or ask a question. Reply with either:\n• \"add expense: <your text>\"\n• \"ask: <your question>\"",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        640,
+        688
+      ],
+      "id": "59b33450-6355-49ca-b811-56e8634aa8be",
+      "name": "Ask Clarification",
+      "webhookId": "3a1112a4-5a0c-45b8-bdcf-141b4ee8204b",
+      "credentials": {
+        "telegramApi": {
+          "id": "hIDk7MgpLrb1W8En",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.intent }}",
+              "rightValue": "INGEST",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              },
+              "id": "route-intent"
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        800,
+        880
+      ],
+      "id": "bfe6e57a-025a-4570-bcd7-54c5985bd2a1",
+      "name": "Route by Intent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Build Unified Text').item.json.unified_text }}",
+        "options": {
+          "systemMessage": "You are a Telegram assistant connected to Elasticsearch via the MCP server.\nYour role is to turn user questions into precise tool calls and reply with clear, curated answers.\n\nInputs: User messages in plain text from Telegram.\n\nBehavior:\n\nParse the intent (e.g., expenses, receipts, totals, top N, date ranges).\n\nMap intent into the correct MCP tool call and parameters. You have two indices to get the data from one is expenses and the other is notebook_index_semantic_v1.\n\nThe index \"notebook_index_semantic_v1\" got all the details on the Uber Trips and its fare, promotions, travel time & date, duration.\n\nThe index \"expenses\" got all the details on personal expenses like spends for clothes, food like Biriyani, Burger, Fried Rice, and Car Rentals, and it got data like payment methods, merchants, items spent on.\n\nMake sure you choose the right index for querying.\n\nAlways prefer structured queries (e.g., ES|QL) over vague responses.\n\nWhen returning results, summarize them in concise natural language, followed by any relevant numbers or tables.\n\nTone: Professional, clear, and direct. Replies must fit well in a chat interface.\n\nConstraints:\n\nDo not expose internal MCP or Elasticsearch details (URLs, tokens, JSON internals).\n\nOnly return the answer, not the raw query payload, unless the user explicitly asks for it.\n\nIf a query cannot be answered, reply politely with:\n“I wasn’t able to find that in Elasticsearch. Can you rephrase or provide more details?”\n\nYour goal is to act as a curated expense/receipt search assistant for Telegram users, powered by Elasticsearch MCP."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1088,
+        1088
+      ],
+      "id": "5b5cca86-fbdd-4f78-a19b-fa89f6890554",
+      "name": "AI Agent (Query)",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "model": "anthropic.claude-3-5-sonnet-20241022-v2:0",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAwsBedrock",
+      "typeVersion": 1.1,
+      "position": [
+        1040,
+        1248
+      ],
+      "id": "9a9a5c06-1c10-402a-a1d1-43e215054483",
+      "name": "AWS Bedrock Chat Model",
+      "credentials": {
+        "aws": {
+          "id": "s7bdmXwQFEO7gTkc",
+          "name": "AWS account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "endpointUrl": "<add.your.elastic.cloud/api/agent_builder/mcp>",
+        "serverTransport": "httpStreamable",
+        "authentication": "headerAuth",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.1,
+      "position": [
+        1296,
+        1264
+      ],
+      "id": "54b56286-8dee-4167-a85f-a44ce206c438",
+      "name": "MCP Client",
+      "notesInFlow": true,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "CnkbF2fJw5QOw3XX",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1456,
+        1088
+      ],
+      "id": "eb2baafe-2d27-48aa-8a1c-0197ce7791ce",
+      "name": "Send a text message (Query)",
+      "webhookId": "3a1112a4-5a0c-45b8-bdcf-141b4ee8204b",
+      "credentials": {
+        "telegramApi": {
+          "id": "hIDk7MgpLrb1W8En",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chat_id }}{{ $json.user_id }}{{ $json.first_name }}{{ $json.unified_text }}{{ $('Build Unified Text').item.json.unified_text }}",
+        "options": {
+          "systemMessage": "You extract daily expense details from a Telegram message and return exactly ONE valid JSON object (no code fences). Fields: chat_id, user_id, ts (ISO 8601), amount (number), currency (ISO 4217), normalized_inr (number if INR else omit), merchant, category (food,grocery,transport,fuel,shopping,utilities,rent,entertainment,health,travel,education,fees,subscriptions,other), payment_method (upi,credit_card,debit_card,card,cash,net_banking,wallet,cod,unknown), note, raw_transcript, segments[]. Rules: Use Asia/Kolkata now if time not provided; interpret today/yesterday as 2025. Detect ₹→INR. Normalize GPay→upi. Do not invent values; omit unknowns. Output only one clean JSON object."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1088,
+        688
+      ],
+      "id": "d055dc64-fea7-452e-be18-83aa916240c7",
+      "name": "Ingestion Agent",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $input.all()[0]?.json?.output;\nfunction extractFirstJsonObject(str){\n  const start = str.indexOf('{');\n  if(start===-1) throw new Error(\"No '{' found\");\n  let depth=0;\n  for(let i=start;i<str.length;i++){\n    const ch=str[i];\n    if(ch==='{' ) depth++;\n    else if(ch==='}'){\n      depth--;\n      if(depth===0) return str.slice(start,i+1);\n    }\n  }\n  throw new Error('Unbalanced braces');\n}\nconst text = extractFirstJsonObject(raw).trim();\nlet doc;\ntry { doc = JSON.parse(text); } catch { throw new Error('Invalid JSON from model'); }\nreturn [{ json: doc }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1376,
+        688
+      ],
+      "id": "fb877659-35ea-4363-8d06-e6b4e7695978",
+      "name": "Extract JSON"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=<add.your.elastic.cloud.url>/expenses/_create/{{ $('Telegram Trigger').item.json.message.message_id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "add_your_elastic_cloud_api_key_here"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"chat_id\": \"{{ $json.chat_id }}\",\n  \"user_id\": \"{{ $json.user_id }}\",\n  \"ts\": \"{{ $json.ts }}\",\n  \"amount\": {{ $json.amount }},\n  \"currency\": \"{{ $json.currency }}\",\n  \"normalized_inr\": {{ $json.normalized_inr || 0 }},\n  \"merchant\": \"{{ $json.merchant }}\",\n  \"category\": \"{{ $json.category }}\",\n  \"payment_method\": \"{{ $json.payment_method }}\",\n  \"note\": \"{{ $json.note }}\",\n  \"raw_transcript\": \"{{ $json.raw_transcript }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1552,
+        688
+      ],
+      "id": "def87ef5-829a-4cd9-954f-31ba84684a5b",
+      "name": "Index in Elasticsearch"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "=Added Expense:\nPaid {{ $('Extract JSON').item.json.currency }} {{ $('Extract JSON').item.json.amount }} via {{ $('Extract JSON').item.json.payment_method }} on spend {{ $('Extract JSON').item.json.segments[0] }} and {{ $('Extract JSON').item.json.segments[1] }}.\n",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1776,
+        688
+      ],
+      "id": "69125193-2cf1-4c48-a90c-71f5844240a8",
+      "name": "Ack (Ingestion)",
+      "webhookId": "3a1112a4-5a0c-45b8-bdcf-141b4ee8204b",
+      "credentials": {
+        "telegramApi": {
+          "id": "hIDk7MgpLrb1W8En",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "anthropic.claude-3-5-sonnet-20241022-v2:0",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAwsBedrock",
+      "typeVersion": 1.1,
+      "position": [
+        1056,
+        864
+      ],
+      "id": "884dda83-17d3-47fd-aa39-6827bc2af673",
+      "name": "AWS Bedrock Chat Model1",
+      "credentials": {
+        "aws": {
+          "id": "s7bdmXwQFEO7gTkc",
+          "name": "AWS account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "44ca8234-451a-450a-bb63-a5b2f459c624",
+      "name": "When chat message received",
+      "webhookId": "519472a5-3cef-4223-b83c-9a77e3b86b68"
+    },
+    {
+      "parameters": {
+        "content": "Intent Classifier",
+        "height": 384,
+        "width": 400,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -208,
+        848
+      ],
+      "typeVersion": 1,
+      "id": "d169b50a-6aeb-4157-a594-4953ae1e250f",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "Query Flow",
+        "height": 320,
+        "width": 672
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        992,
+        1040
+      ],
+      "typeVersion": 1,
+      "id": "dfc5a75f-5071-4bfe-873a-0d30f3e7fdb0",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "07ecae80-fca2-4d48-b46c-7a9d07a61bb6",
+              "leftValue": "={{ $('Parse Classifier JSON').item.json.confidence }}",
+              "rightValue": 0.5,
+              "operator": {
+                "type": "number",
+                "operation": "lt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        448,
+        864
+      ],
+      "id": "3846b01e-de6e-413f-a064-e67981a307da",
+      "name": "Low Confidence Gates?"
+    },
+    {
+      "parameters": {
+        "errorMessage": "Sorry did not find out"
+      },
+      "type": "n8n-nodes-base.stopAndError",
+      "typeVersion": 1,
+      "position": [
+        784,
+        688
+      ],
+      "id": "a25f7ba9-99c5-4c26-ba46-9f78caac65eb",
+      "name": "Stop and Error"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Allowed User?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Allowed User?": {
+      "main": [
+        [
+          {
+            "node": "Voice or Text?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Voice or Text?": {
+      "main": [
+        [
+          {
+            "node": "Get File (Voice)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Unified Text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get File (Voice)": {
+      "main": [
+        [
+          {
+            "node": "Sarvam STT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sarvam STT": {
+      "main": [
+        [
+          {
+            "node": "Set Transcript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Transcript": {
+      "main": [
+        [
+          {
+            "node": "Build Unified Text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Unified Text": {
+      "main": [
+        [
+          {
+            "node": "Classifier Agent (LLM)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AWS Bedrock (Classifier)": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Classifier Agent (LLM)",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Classifier Agent (LLM)": {
+      "main": [
+        [
+          {
+            "node": "Parse Classifier JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Classifier JSON": {
+      "main": [
+        [
+          {
+            "node": "Low Confidence Gates?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ask Clarification": {
+      "main": [
+        [
+          {
+            "node": "Stop and Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route by Intent": {
+      "main": [
+        [
+          {
+            "node": "Ingestion Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent (Query)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent (Query)": {
+      "main": [
+        [
+          {
+            "node": "Send a text message (Query)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AWS Bedrock Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent (Query)",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent (Query)",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ingestion Agent": {
+      "main": [
+        [
+          {
+            "node": "Extract JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract JSON": {
+      "main": [
+        [
+          {
+            "node": "Index in Elasticsearch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Index in Elasticsearch": {
+      "main": [
+        [
+          {
+            "node": "Ack (Ingestion)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AWS Bedrock Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Ingestion Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Low Confidence Gates?": {
+      "main": [
+        [
+          {
+            "node": "Ask Clarification",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Route by Intent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "b965223a-31c7-4108-97f1-6e6db16fd621",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "8d32c86b066dad73b7fc583b95e60b6f484aa599642268b90542f423cb02b6d7"
+  },
+  "id": "bFihbHpwThtUSvGF",
+  "tags": [
+    {
+      "createdAt": "2025-09-26T11:51:06.442Z",
+      "updatedAt": "2025-09-26T11:51:06.442Z",
+      "id": "LFvyuI3lxckuBtvE",
+      "name": "elastic_mcp"
+    }
+  ]
+}
