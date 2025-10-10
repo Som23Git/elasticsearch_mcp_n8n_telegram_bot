@@ -5,6 +5,7 @@ baseurl: /elasticsearch_mcp_n8n_telegram_bot
 
 header_pages:
   - README.md
+  - tutorial.md
 
 permalink: pretty
 plugins:

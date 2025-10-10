@@ -61,15 +61,15 @@ Based on the intent the workflow either:
 
 This repo contains documentation, the `architecture diagram`, `n8n_workflow_scaffold` which you can import directly. For a working deployment, implement these parts:
 
-1. **n8n workflow**
+- **n8n workflow**
    - Create the workflow shown in the diagram inside n8n.
    - Add Telegram Trigger node, allowed-user filter, STT integration, LLM agent HTTP nodes, and Elasticsearch nodes.
 
-2. **AWS Bedrock**
+-. **AWS Bedrock**
    - Provision models for classification and chat (or use a single flexible model with prompts).
    - Securely store credentials and endpoints.
 
-3. **Elasticsearch**
+- **Elasticsearch**
    - Create an index with an appropriate mapping for ingested documents.
 
  Elasticsearch Index Mapping with `semantic_text` field enabled:
@@ -267,7 +267,7 @@ This repo contains documentation, the `architecture diagram`, `n8n_workflow_scaf
 }
    ```
 
-4. **Secrets and credentials**
+- **Secrets and credentials**
    - Configure Telegram bot token, Bedrock auth, STT API key, and Elasticsearch credentials in the environment or n8n credential manager.
 
 ## License
