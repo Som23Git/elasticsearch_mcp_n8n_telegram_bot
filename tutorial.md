@@ -197,6 +197,16 @@ Once everything is connected, **save** your workflow and **execute** it directly
 
 > 💡 **Tip:** Restrict bot responses to your own Telegram `user_id` to prevent others from accidentally triggering or accessing your data.
 
+FAQ/Supporting Documentation(s) to start:
+
+- [How to get the Telegram Bot Token?](https://core.telegram.org/bots/tutorial#obtain-your-bot-token.)  
+
+- [How to get the Sarvam API Key?](https://docs.sarvam.ai/api-reference-docs/authentication)
+
+- [How to get/create access keys & secret token from AWS?](https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started-api.html)
+
+- [How to create an API Key in Elasticsearch programmatically?](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-create-api-key)
+
 ---
 
 If you encounter any issues or edge cases, feel free to open an issue in the GitHub repository — contributions and feedback are always welcome!

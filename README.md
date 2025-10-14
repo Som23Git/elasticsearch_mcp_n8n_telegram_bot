@@ -18,6 +18,12 @@ Based on the intent the workflow either:
 
 > `Low-confidence classifier` outputs trigger an interactive clarification step in Telegram when the confidence is below the threshold.
 
+## End Goal
+
+The system accepts voice or text input, processes it, queries Elasticsearch with your expense data, applies semantic retrieval, and generates a natural language response in the Telegram bot.
+
+![telegram_bot_messages](assets/telegram_bot_messages.png)
+
 ## Architecture 
 
 ![Architecture diagram](n8n_workflow_architecture.png "architecture image")
