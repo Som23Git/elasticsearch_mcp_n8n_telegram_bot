@@ -1,0 +1,101 @@
+amount,category,currency,merchant,normalized_inr,note,payment_method,raw_transcript,ts
+800,transport,INR,Rapido,800,Cab ride,netbanking,800 rupees on Rapido cab ride on 24th of January 2025 paid via netbanking.,2025-01-24T00:45:00.000Z
+450,food,INR,Domino's,450,Lunch meal,gpay,I spent 450 rupees at Domino's for lunch meal on 16th of February 2025 and paid using GPay.,2025-02-16T12:15:09.000Z
+2000,shopping,INR,Amazon,2000,T-shirt purchase,credit_card,Can you record an expense of 2000 rupees for t-shirt purchase at Amazon on 18th of February 2025 paid via credit card.,2025-02-18T00:50:15.000Z
+500,shopping,INR,Flipkart,500,Jeans purchase,upi,Can you record an expense of 500 rupees for jeans purchase at Flipkart on 21st of February 2025 paid via UPI.,2025-02-21T18:50:45.000Z
+220,food,INR,Food Panda,220,Paneer tikka,debit_card,Can you add an expense of 220 rupees for paneer tikka from Food Panda on 23rd of February 2025 and I paid via debit card.,2025-02-23T12:50:15.000Z
+5000,shopping,INR,Amazon,5000,Clothes purchase,credit_card,Can you record an expense of 5000 rupees for clothes purchase at Amazon on 5th of March 2025 paid via credit card.,2025-03-05T15:50:00.000Z
+500,food,INR,McDonald's,500,Fries and coke,gpay,I spent 500 rupees at McDonald's for fries and coke on 6th of March 2025 and paid using GPay.,2025-03-06T18:05:15.000Z
+650,food,INR,Zomato,650,Biriyani order,credit_card,Can you add an expense of 650 rupees for biriyani order from Zomato on 16th of March 2025 and I paid via credit card.,2025-03-16T15:45:15.000Z
+180,food,INR,Zomato,180,Sweets and snacks,debit_card,Can you add an expense of 180 rupees for sweets and snacks from Zomato on 25th of March 2025 and I paid via debit card.,2025-03-25T12:00:45.000Z
+500,food,INR,Food Panda,500,Thai red curry,upi,Can you add an expense of 500 rupees for thai red curry from Food Panda on 29th of March 2025 and I paid via UPI.,2025-03-29T00:00:15.000Z
+500,food,INR,Swiggy,500,Biriyani order,upi,Can you add an expense of 500 rupees for biriyani order from Swiggy on 31st of March 2025 and I paid via UPI.,2025-03-31T09:45:45.000Z
+250,food,INR,Food Panda,250,Biriyani order,debit_card,Can you add an expense of 250 rupees for biriyani order from Food Panda on 1st of April 2025 and I paid via debit card.,2025-04-01T00:45:30.000Z
+1500,shopping,INR,Max,1500,T-shirt purchase,credit_card,Can you record an expense of 1500 rupees for t-shirt purchase at Max on 3rd of April 2025 paid via credit card.,2025-04-03T15:45:15.000Z
+3700,food,INR,Zomato,3700,Veg thali,debit_card,Can you add an expense of 3700 rupees for veg thali from Zomato on 5th of April 2025 and I paid via debit card.,2025-04-05T18:15:09.000Z
+650,food,INR,McDonald's,650,Pizza order,debit_card,I spent 650 rupees at McDonald's for pizza order on 9th of April 2025 and paid using debit card.,2025-04-09T22:50:45.000Z
+2800,food,INR,Zomato,2800,Biriyani order,credit_card,Can you add an expense of 2800 rupees for biriyani order from Zomato on 27th of April 2025 and I paid via credit card.,2025-04-27T15:15:30.000Z
+500,food,INR,Domino's,500,Fries and coke,credit_card,I spent 500 rupees at Domino's for fries and coke on 30th of April 2025 and paid using credit card.,2025-04-30T15:10:30.000Z
+800,transport,INR,Uber,800,Cab ride,netbanking,800 rupees on Uber cab ride on 3rd of May 2025 paid via netbanking.,2025-05-03T09:00:45.000Z
+220,food,INR,McDonald's,220,Pizza order,debit_card,I spent 220 rupees at McDonald's for pizza order on 12th of May 2025 and paid using debit card.,2025-05-12T00:30:30.000Z
+220,transport,INR,Ola,220,Late night ride,upi,220 rupees on Ola late night ride on 16th of May 2025 paid via UPI.,2025-05-16T00:30:00.000Z
+1500,food,INR,Food Panda,1500,Sandwiches,gpay,Can you add an expense of 1500 rupees for sandwiches from Food Panda on 16th of May 2025 and I paid via GPay.,2025-05-16T09:30:45.000Z
+1200,food,INR,Food Panda,1200,Coffee expense,netbanking,Can you add an expense of 1200 rupees for coffee expense from Food Panda on 19th of May 2025 and I paid via netbanking.,2025-05-19T09:45:15.000Z
+1800,shopping,INR,Amazon,1800,T-shirt purchase,cash,Can you record an expense of 1800 rupees for t-shirt purchase at Amazon on 19th of May 2025 paid via cash.,2025-05-19T12:05:15.000Z
+500,food,INR,McDonald's,500,Lunch meal,debit_card,I spent 500 rupees at McDonald's for lunch meal on 19th of May 2025 and paid using debit card.,2025-05-19T12:50:00.000Z
+2200,transport,INR,Uber,2200,Office commute,netbanking,2200 rupees on Uber office commute on 20th of May 2025 paid via netbanking.,2025-05-20T15:50:45.000Z
+4500,food,INR,Domino's,4500,Fries and coke,gpay,I spent 4500 rupees at Domino's for fries and coke on 22nd of May 2025 and paid using GPay.,2025-05-22T09:45:15.000Z
+1200,food,INR,McDonald's,1200,Lunch meal,cash,I spent 1200 rupees at McDonald's for lunch meal on 22nd of May 2025 and paid using cash.,2025-05-22T20:00:09.000Z
+150,transport,INR,Rapido,150,Office commute,debit_card,150 rupees on Rapido office commute on 23rd of May 2025 paid via debit card.,2025-05-23T22:00:00.000Z
+120,food,INR,Food Panda,120,Biriyani order,upi,Can you add an expense of 120 rupees for biriyani order from Food Panda on 27th of May 2025 and I paid via UPI.,2025-05-27T22:05:15.000Z
+300,food,INR,McDonald's,300,Burger purchase,upi,I spent 300 rupees at McDonald's for burger purchase on 1st of June 2025 and paid using UPI.,2025-06-01T00:45:09.000Z
+1500,shopping,INR,Amazon,1500,Jeans purchase,netbanking,Can you record an expense of 1500 rupees for jeans purchase at Amazon on 2nd of June 2025 paid via netbanking.,2025-06-02T12:10:00.000Z
+6500,shopping,INR,Lifestyle,6500,T-shirt purchase,gpay,Can you record an expense of 6500 rupees for t-shirt purchase at Lifestyle on 2nd of June 2025 paid via GPay.,2025-06-02T12:50:45.000Z
+500,shopping,INR,Amazon,500,T-shirt purchase,upi,Can you record an expense of 500 rupees for t-shirt purchase at Amazon on 3rd of June 2025 paid via UPI.,2025-06-03T09:50:09.000Z
+1200,shopping,INR,Amazon,1200,Jeans purchase,cash,Can you record an expense of 1200 rupees for jeans purchase at Amazon on 5th of June 2025 paid via cash.,2025-06-05T20:10:30.000Z
+3000,shopping,INR,Amazon,3000,Shoes purchase,credit_card,Can you record an expense of 3000 rupees for shoes purchase at Amazon on 6th of June 2025 paid via credit card.,2025-06-06T15:50:00.000Z
+800,food,INR,Domino's,800,Burger purchase,cash,I spent 800 rupees at Domino's for burger purchase on 9th of June 2025 and paid using cash.,2025-06-09T12:50:09.000Z
+250,food,INR,Domino's,250,Lunch meal,debit_card,I spent 250 rupees at Domino's for lunch meal on 16th of June 2025 and paid using debit card.,2025-06-16T00:00:15.000Z
+2200,transport,INR,Zoomcar,2200,Office commute,netbanking,2200 rupees on Zoomcar office commute on 16th of June 2025 paid via netbanking.,2025-06-16T22:10:15.000Z
+500,food,INR,McDonald's,500,Fries and coke,upi,I spent 500 rupees at McDonald's for fries and coke on 21st of June 2025 and paid using UPI.,2025-06-21T15:10:15.000Z
+3200,food,INR,McDonald's,3200,Burger purchase,cash,I spent 3200 rupees at McDonald's for burger purchase on 22nd of June 2025 and paid using cash.,2025-06-22T00:45:30.000Z
+1200,food,INR,Domino's,1200,Dinner combo,gpay,I spent 1200 rupees at Domino's for dinner combo on 28th of June 2025 and paid using GPay.,2025-06-28T20:10:45.000Z
+450,food,INR,Food Panda,450,Thai red curry,upi,Can you add an expense of 450 rupees for thai red curry from Food Panda on 30th of June 2025 and I paid via UPI.,2025-06-30T12:15:15.000Z
+3200,food,INR,Swiggy,3200,Veg thali,credit_card,Can you add an expense of 3200 rupees for veg thali from Swiggy on 2nd of July 2025 and I paid via credit card.,2025-07-02T18:10:30.000Z
+4500,food,INR,Zomato,4500,Veg thali,gpay,Can you add an expense of 4500 rupees for veg thali from Zomato on 2nd of July 2025 and I paid via GPay.,2025-07-02T18:30:15.000Z
+2800,transport,INR,Rapido,2800,Office commute,gpay,2800 rupees on Rapido office commute on 2nd of July 2025 paid via GPay.,2025-07-02T22:45:09.000Z
+300,transport,INR,Ola,300,Cab ride,credit_card,300 rupees on Ola cab ride on 6th of July 2025 paid via credit card.,2025-07-06T00:50:09.000Z
+1200,transport,INR,Uber,1200,Late night ride,upi,1200 rupees on Uber late night ride on 7th of July 2025 paid via UPI.,2025-07-07T00:05:30.000Z
+120,food,INR,Food Panda,120,Veg thali,netbanking,Can you add an expense of 120 rupees for veg thali from Food Panda on 12th of July 2025 and I paid via netbanking.,2025-07-12T09:45:30.000Z
+2200,transport,INR,Ola,2200,Car rental,credit_card,2200 rupees on Ola car rental on 12th of July 2025 paid via credit card.,2025-07-12T22:50:00.000Z
+1200,shopping,INR,Max,1200,Clothes purchase,upi,Can you record an expense of 1200 rupees for clothes purchase at Max on 20th of July 2025 paid via UPI.,2025-07-20T00:30:09.000Z
+3200,food,INR,Domino's,3200,Lunch meal,gpay,I spent 3200 rupees at Domino's for lunch meal on 30th of July 2025 and paid using GPay.,2025-07-30T20:30:45.000Z
+4500,food,INR,Domino's,4500,Pizza order,gpay,I spent 4500 rupees at Domino's for pizza order on 31st of July 2025 and paid using GPay.,2025-07-31T15:05:30.000Z
+800,transport,INR,Ola,800,Office commute,cash,800 rupees on Ola office commute on 4th of August 2025 paid via cash.,2025-08-04T12:15:00.000Z
+500,food,INR,Zomato,500,Biriyani order,netbanking,Can you add an expense of 500 rupees for biriyani order from Zomato on 5th of August 2025 and I paid via netbanking.,2025-08-05T18:00:09.000Z
+2800,food,INR,Zomato,2800,Veg thali,upi,Can you add an expense of 2800 rupees for veg thali from Zomato on 7th of August 2025 and I paid via UPI.,2025-08-07T15:15:15.000Z
+500,shopping,INR,Lifestyle,500,Shoes purchase,upi,Can you record an expense of 500 rupees for shoes purchase at Lifestyle on 8th of August 2025 paid via UPI.,2025-08-08T18:45:00.000Z
+6500,shopping,INR,Lifestyle,6500,Gift shopping,gpay,Can you record an expense of 6500 rupees for gift shopping at Lifestyle on 9th of August 2025 paid via GPay.,2025-08-09T12:50:30.000Z
+2800,food,INR,Swiggy,2800,Sandwiches,debit_card,Can you add an expense of 2800 rupees for sandwiches from Swiggy on 10th of August 2025 and I paid via debit card.,2025-08-10T22:30:09.000Z
+2800,transport,INR,Zoomcar,2800,Late night ride,credit_card,2800 rupees on Zoomcar late night ride on 13th of August 2025 paid via credit card.,2025-08-13T20:45:30.000Z
+300,food,INR,Food Panda,300,Veg thali,upi,Can you add an expense of 300 rupees for veg thali from Food Panda on 15th of August 2025 and I paid via UPI.,2025-08-15T00:15:45.000Z
+1500,food,INR,Swiggy,1500,Veg thali,cash,Can you add an expense of 1500 rupees for veg thali from Swiggy on 16th of August 2025 and I paid via cash.,2025-08-16T15:05:00.000Z
+180,food,INR,Zomato,180,Sandwiches,netbanking,Can you add an expense of 180 rupees for sandwiches from Zomato on 18th of August 2025 and I paid via netbanking.,2025-08-18T15:10:30.000Z
+450,transport,INR,Uber,450,Airport drop,debit_card,450 rupees on Uber airport drop on 20th of August 2025 paid via debit card.,2025-08-20T09:45:00.000Z
+500,food,INR,Food Panda,500,Coffee expense,debit_card,Can you add an expense of 500 rupees for coffee expense from Food Panda on 21st of August 2025 and I paid via debit card.,2025-08-21T22:00:45.000Z
+1200,food,INR,McDonald's,1200,Burger purchase,credit_card,I spent 1200 rupees at McDonald's for burger purchase on 23rd of August 2025 and paid using credit card.,2025-08-23T20:10:15.000Z
+500,food,INR,Domino's,500,Burger purchase,upi,I spent 500 rupees at Domino's for burger purchase on 25th of August 2025 and paid using UPI.,2025-08-25T18:00:15.000Z
+4500,food,INR,McDonald's,4500,Burger purchase,upi,I spent 4500 rupees at McDonald's for burger purchase on 25th of August 2025 and paid using UPI.,2025-08-25T18:15:15.000Z
+180,food,INR,McDonald's,180,Fries and coke,gpay,I spent 180 rupees at McDonald's for fries and coke on 25th of August 2025 and paid using GPay.,2025-08-25T18:45:09.000Z
+2200,transport,INR,Zoomcar,2200,Office commute,credit_card,2200 rupees on Zoomcar office commute on 27th of August 2025 paid via credit card.,2025-08-27T15:10:30.000Z
+2800,transport,INR,Zoomcar,2800,Office commute,upi,2800 rupees on Zoomcar office commute on 27th of August 2025 paid via UPI.,2025-08-27T18:50:45.000Z
+3000,shopping,INR,Max,3000,T-shirt purchase,cash,Can you record an expense of 3000 rupees for t-shirt purchase at Max on 28th of August 2025 paid via cash.,2025-08-28T12:50:09.000Z
+150,transport,INR,Zoomcar,150,Car rental,cash,150 rupees on Zoomcar car rental on 1st of September 2025 paid via cash.,2025-09-01T22:15:45.000Z
+800,food,INR,Swiggy,800,Thai red curry,cash,Can you add an expense of 800 rupees for thai red curry from Swiggy on 2nd of September 2025 and I paid via cash.,2025-09-02T22:10:09.000Z
+3200,food,INR,McDonald's,3200,Dinner combo,credit_card,I spent 3200 rupees at McDonald's for dinner combo on 5th of September 2025 and paid using credit card.,2025-09-05T20:10:45.000Z
+150,transport,INR,Zoomcar,150,Cab ride,upi,150 rupees on Zoomcar cab ride on 6th of September 2025 paid via UPI.,2025-09-06T18:50:09.000Z
+2800,transport,INR,Rapido,2800,Office commute,netbanking,2800 rupees on Rapido office commute on 10th of September 2025 paid via netbanking.,2025-09-10T12:05:30.000Z
+3700,food,INR,Domino's,3700,Fries and coke,cash,I spent 3700 rupees at Domino's for fries and coke on 10th of September 2025 and paid using cash.,2025-09-10T15:30:45.000Z
+450,food,INR,Zomato,450,Sweets and snacks,netbanking,Can you add an expense of 450 rupees for sweets and snacks from Zomato on 12th of September 2025 and I paid via netbanking.,2025-09-12T12:10:09.000Z
+1200,food,INR,Food Panda,1200,Biriyani order,gpay,Can you add an expense of 1200 rupees for biriyani order from Food Panda on 18th of September 2025 and I paid via GPay.,2025-09-18T09:45:30.000Z
+300,food,INR,Zomato,300,Sandwiches,netbanking,Can you add an expense of 300 rupees for sandwiches from Zomato on 21st of September 2025 and I paid via netbanking.,2025-09-21T22:05:15.000Z
+120,food,INR,Domino's,120,Lunch meal,debit_card,I spent 120 rupees at Domino's for lunch meal on 23rd of September 2025 and paid using debit card.,2025-09-23T00:00:45.000Z
+4500,food,INR,Zomato,4500,Biriyani order,cash,Can you add an expense of 4500 rupees for biriyani order from Zomato on 23rd of September 2025 and I paid via cash.,2025-09-23T12:15:30.000Z
+300,food,INR,Food Panda,300,Sweets and snacks,debit_card,Can you add an expense of 300 rupees for sweets and snacks from Food Panda on 24th of September 2025 and I paid via debit card.,2025-09-24T22:00:30.000Z
+650,food,INR,Food Panda,650,Veg thali,upi,Can you add an expense of 650 rupees for veg thali from Food Panda on 27th of September 2025 and I paid via UPI.,2025-09-27T22:30:15.000Z
+2500,shopping,INR,Flipkart,2500,Shoes purchase,gpay,Can you record an expense of 2500 rupees for shoes purchase at Flipkart on 29th of September 2025 paid via GPay.,2025-09-29T18:15:30.000Z
+450,transport,INR,Uber,450,Office commute,credit_card,450 rupees on Uber office commute on 30th of September 2025 paid via credit card.,2025-09-30T18:30:00.000Z
+3200,food,INR,Zomato,3200,Coffee expense,debit_card,Can you add an expense of 3200 rupees for coffee expense from Zomato on 2nd of October 2025 and I paid via debit card.,2025-10-02T20:00:09.000Z
+3700,food,INR,Food Panda,3700,Biriyani order,cash,Can you add an expense of 3700 rupees for biriyani order from Food Panda on 2nd of October 2025 and I paid via cash.,2025-10-02T20:30:30.000Z
+220,transport,INR,Ola,220,Late night ride,upi,220 rupees on Ola late night ride on 5th of October 2025 paid via UPI.,2025-10-05T20:05:15.000Z
+500,shopping,INR,Amazon,500,T-shirt purchase,debit_card,Can you record an expense of 500 rupees for t-shirt purchase at Amazon on 7th of October 2025 paid via debit card.,2025-10-07T09:45:09.000Z
+220,transport,INR,Rapido,220,Car rental,upi,220 rupees on Rapido car rental on 8th of October 2025 paid via UPI.,2025-10-08T22:10:45.000Z
+800,shopping,INR,Lifestyle,800,Gift shopping,upi,Can you record an expense of 800 rupees for gift shopping at Lifestyle on 11th of October 2025 paid via UPI.,2025-10-11T20:10:30.000Z
+450,transport,INR,Uber,450,Late night ride,debit_card,450 rupees on Uber late night ride on 14th of October 2025 paid via debit card.,2025-10-14T00:15:15.000Z
+3700,food,INR,McDonald's,3700,Fries and coke,upi,I spent 3700 rupees at McDonald's for fries and coke on 15th of October 2025 and paid using UPI.,2025-10-15T18:00:15.000Z
+1800,transport,INR,Zoomcar,1800,Office commute,debit_card,1800 rupees on Zoomcar office commute on 17th of October 2025 paid via debit card.,2025-10-17T09:30:30.000Z
+800,shopping,INR,Max,800,Shoes purchase,upi,Can you record an expense of 800 rupees for shoes purchase at Max on 19th of October 2025 paid via UPI.,2025-10-19T12:45:30.000Z
+1200,transport,INR,Ola,1200,Car rental,cash,1200 rupees on Ola car rental on 19th of October 2025 paid via cash.,2025-10-19T15:10:15.000Z
+500,shopping,INR,Lifestyle,500,Gift shopping,gpay,Can you record an expense of 500 rupees for gift shopping at Lifestyle on 22nd of October 2025 paid via GPay.,2025-10-22T12:10:00.000Z
+4500,food,INR,Domino's,4500,Burger purchase,netbanking,I spent 4500 rupees at Domino's for burger purchase on 23rd of October 2025 and paid using netbanking.,2025-10-23T00:05:15.000Z
+3700,food,INR,Swiggy,3700,Veg thali,netbanking,Can you add an expense of 3700 rupees for veg thali from Swiggy on 23rd of October 2025 and I paid via netbanking.,2025-10-23T15:15:00.000Z
