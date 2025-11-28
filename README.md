@@ -278,9 +278,9 @@ This repo contains documentation, the `architecture diagram`, `n8n_workflow_scaf
 
 ## Sample data & Colab quickstart
 
-- **Sample CSV**: `data/synthetic_expenses_data.csv` contains synthetic 2025 expenses with the fields shown in the mapping above. Import it to your `expenses` index (or the index name you prefer) to test semantic search and the n8n ingestion flow.
+- **Sample CSV**: `data/expense_dataset_elasticsearch.csv` contains synthetic 2025 expenses with the fields shown in the mapping above. Import it to your `expenses` index (or the index name you prefer) to test semantic search and the n8n ingestion flow.
 
-- **Try it in Colab**: Open [build_expense_tool_colab.ipynb](build_expense_tool_colab.ipynb) in Google Colab to run through ingestion and query examples without setting up local tooling. Update the Elasticsearch endpoint, auth, and index name in the notebook cells before running.
+- **Try it in Colab**: Open [build-elastic-agent-expense-assistant.ipynb](./build-elastic-agent-expense-assistant.ipynb) in Google Colab to run through ingestion and query examples without setting up local tooling. Update the Elasticsearch endpoint, auth, and index name in the notebook cells before running.
 
 ## License
 
