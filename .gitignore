@@ -1,7 +1,9 @@
 .DS_Store
+.env
 
 Automated Intent Classifier with Ingest & Query.json
 tutorial.example.md
 how_elasticsearch_is_changing_agent_landscape.example.md
 unifying_intelligence.blog.md
 agent_builder_n8n_tool_temp
+build_expense_tool_colab.ipynb
